@@ -47,7 +47,7 @@ class ExplodingMonkeyGameScene: SKScene {
         var currentX: CGFloat = -15
         
         while currentX < frame.width + 15 {
-            let size = CGSize(width: Int.random(in: 2...4) * 40, height: Int.random(in: 300...600))
+            let size = CGSize(width: Int.random(in: 2...4) * 40, height: Int.random(in: Int(size.height*0.3)...Int(size.height*0.6)))
             currentX += size.width + 2
             
             let building = BuildingNode(color: .red, size: size)
@@ -170,7 +170,7 @@ extension ExplodingMonkeyGameScene: SKPhysicsContactDelegate {
     }
     
     func destroy(player: SKSpriteNode) {
-        if let explosion = SKEmitterNode(fileNamed: "Explosion") {
+        if let explosion = SKEmitterNode(fileNamed: "hitPlayer") {
             explosion.position = player.position
             addChild(explosion)
             explosion.run(.sequence([.wait(forDuration: 3), .removeFromParent()]))
@@ -190,7 +190,7 @@ extension ExplodingMonkeyGameScene: SKPhysicsContactDelegate {
         let buildingLocation = convert(contactPoint, to: building)
         building.hit(at: buildingLocation)
         
-        if let explosion = SKEmitterNode(fileNamed: "Explosion") {
+        if let explosion = SKEmitterNode(fileNamed: "hitBuilding") {
             explosion.position = contactPoint
             addChild(explosion)
             explosion.run(.sequence([.wait(forDuration: 3), .removeFromParent()]))
