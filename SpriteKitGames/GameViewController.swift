@@ -11,20 +11,22 @@ import GameplayKit
 
 enum GameSceneType {
     case spaceShooter
+    case explodingMonkey
 }
 
 class GameViewController: UIViewController {
-    
+    let sceneType = GameSceneType.explodingMonkey
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         if let view = self.view as! SKView? {
             let scene: SKScene
-            let sceneType = GameSceneType.spaceShooter
             switch sceneType {
             case .spaceShooter:
                 scene = SpaceShooterGameScene(size: CGSize(width: 1560, height: 720))
+            case .explodingMonkey:
+                scene = ExplodingMonkeyGameScene(size: CGSize(width: 1560, height: 720))
             }
             
             scene.anchorPoint = CGPoint(x: 0.5, y: 0.5)
