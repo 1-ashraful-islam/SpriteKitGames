@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		813C45632D86545200664C17 /* EndlessRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EndlessRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		813C45632D86545200664C17 /* SpriteKitGames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpriteKitGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		813C45652D86545200664C17 /* EndlessRunner */ = {
+		813C45652D86545200664C17 /* SpriteKitGames */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = EndlessRunner;
+			path = SpriteKitGames;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		813C455A2D86545100664C17 = {
 			isa = PBXGroup;
 			children = (
-				813C45652D86545200664C17 /* EndlessRunner */,
+				813C45652D86545200664C17 /* SpriteKitGames */,
 				813C45642D86545200664C17 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		813C45642D86545200664C17 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				813C45632D86545200664C17 /* EndlessRunner.app */,
+				813C45632D86545200664C17 /* SpriteKitGames.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		813C45622D86545200664C17 /* EndlessRunner */ = {
+		813C45622D86545200664C17 /* SpriteKitGames */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 813C457A2D86545300664C17 /* Build configuration list for PBXNativeTarget "EndlessRunner" */;
+			buildConfigurationList = 813C457A2D86545300664C17 /* Build configuration list for PBXNativeTarget "SpriteKitGames" */;
 			buildPhases = (
 				813C455F2D86545200664C17 /* Sources */,
 				813C45602D86545200664C17 /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				813C45652D86545200664C17 /* EndlessRunner */,
+				813C45652D86545200664C17 /* SpriteKitGames */,
 			);
-			name = EndlessRunner;
+			name = SpriteKitGames;
 			packageProductDependencies = (
 			);
 			productName = EndlessRunner;
-			productReference = 813C45632D86545200664C17 /* EndlessRunner.app */;
+			productReference = 813C45632D86545200664C17 /* SpriteKitGames.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 813C455E2D86545100664C17 /* Build configuration list for PBXProject "EndlessRunner" */;
+			buildConfigurationList = 813C455E2D86545100664C17 /* Build configuration list for PBXProject "SpriteKitGames" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				813C45622D86545200664C17 /* EndlessRunner */,
+				813C45622D86545200664C17 /* SpriteKitGames */,
 			);
 		};
 /* End PBXProject section */
@@ -303,7 +303,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		813C455E2D86545100664C17 /* Build configuration list for PBXProject "EndlessRunner" */ = {
+		813C455E2D86545100664C17 /* Build configuration list for PBXProject "SpriteKitGames" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				813C45782D86545300664C17 /* Debug */,
@@ -312,7 +312,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		813C457A2D86545300664C17 /* Build configuration list for PBXNativeTarget "EndlessRunner" */ = {
+		813C457A2D86545300664C17 /* Build configuration list for PBXNativeTarget "SpriteKitGames" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				813C457B2D86545300664C17 /* Debug */,
