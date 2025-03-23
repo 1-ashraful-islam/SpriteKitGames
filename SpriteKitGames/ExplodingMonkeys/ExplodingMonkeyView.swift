@@ -1,3 +1,11 @@
+//
+//  ExplodingMonkeyView.swift
+//  SpriteKitGames
+//
+//  Created by Ashraful Islam on 3/23/25.
+//
+
+
 import SpriteKit
 import GameplayKit
 import SwiftUI
@@ -17,22 +25,25 @@ struct ExplodingMonkeyView: View {
     }
     
     var body: some View {
-        VStack {
+        ZStack {
             SpriteView(scene: scene, debugOptions: debugOptions)
                 .ignoresSafeArea()
-            
             VStack {
-                Text("Angle: \(Int(angle))°")
-                Slider(value: $angle, in: 0...90)
-                
-                Text("Velocity: \(Int(velocity))")
-                Slider(value: $velocity, in: 0...200)
-                
-                Button("Launch") {
-//                    scene.launchMonkey(angle: angle, velocity: velocity)
+                HStack {
+                    Text("Angle: \(Int(angle))°")
+                    Slider(value: $angle, in: 0...90)
+                    
+                    Text("Velocity: \(Int(velocity))")
+                    Slider(value: $velocity, in: 0...200)
+                    
+                    Button("Launch") {
+                        scene.launch(angle: Int(angle), velocity: Int(velocity))
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
+                .foregroundColor(.white)
+                Spacer()
             }
-            .padding()
         }
     }
 }

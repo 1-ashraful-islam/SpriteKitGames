@@ -15,26 +15,23 @@ enum GameSceneType {
 }
 
 struct ContentView: View {
-    let sceneType = GameSceneType.explodingMonkey
-    var scene: SKScene
-    var debugOptions: SpriteView.DebugOptions
-    let debug = true
-    
-    init() {
-        
-        switch sceneType {
-        case .spaceShooter:
-            scene = SpaceShooterGameScene(size: CGSize(width: 1560, height: 720))
-        case .explodingMonkey:
-            scene = ExplodingMonkeyGameScene(size: CGSize(width: 1560, height: 720))
-        }
-        scene.scaleMode = .aspectFit
-        debugOptions  = debug ? [.showsPhysics, .showsDrawCount, .showsFPS, .showsNodeCount] : []
-    }
+    @State private var sceneType = GameSceneType.explodingMonkey
     
     var body: some View {
-        SpriteView(scene: scene, debugOptions: debugOptions)
-            .frame(width: 1560, height: 720)
-            .ignoresSafeArea()
+        VStack {
+            Picker("Game", selection: $sceneType) {
+                Text("Shooter").tag(GameSceneType.spaceShooter)
+                Text("Monkey").tag(GameSceneType.explodingMonkey)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding(.horizontal)
+            
+            switch sceneType {
+            case .spaceShooter:
+                SpaceShooterView()
+            case .explodingMonkey:
+                ExplodingMonkeyView()
+            }
+        }
     }
 }

@@ -38,5 +38,9 @@ class ExplodingMonkeyGameScene: SKScene {
         }
 
     }
+    
+    func launch(angle: Int, velocity: Int) {
+        
+    }
 
 }
