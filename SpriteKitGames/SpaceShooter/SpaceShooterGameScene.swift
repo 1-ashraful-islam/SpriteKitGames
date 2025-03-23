@@ -9,7 +9,7 @@ import SpriteKit
 import GameplayKit
 import CoreMotion
 
-enum CollisionType: UInt32 {
+enum spaceCollisionType: UInt32 {
     case player = 1
     case playerWeapon = 2
     case enemy = 4
@@ -47,9 +47,9 @@ class SpaceShooterGameScene: SKScene, SKPhysicsContactDelegate {
         addChild(player)
         
         player.physicsBody = SKPhysicsBody(texture: player.texture!, size: player.texture!.size())
-        player.physicsBody?.categoryBitMask = CollisionType.player.rawValue
-        player.physicsBody?.collisionBitMask = CollisionType.enemy.rawValue | CollisionType.enemyWeapon.rawValue
-        player.physicsBody?.contactTestBitMask = CollisionType.enemy.rawValue | CollisionType.enemyWeapon.rawValue
+        player.physicsBody?.categoryBitMask = spaceCollisionType.player.rawValue
+        player.physicsBody?.collisionBitMask = spaceCollisionType.enemy.rawValue | spaceCollisionType.enemyWeapon.rawValue
+        player.physicsBody?.contactTestBitMask = spaceCollisionType.enemy.rawValue | spaceCollisionType.enemyWeapon.rawValue
         player.physicsBody?.isDynamic = false
     }
     
@@ -140,9 +140,9 @@ class SpaceShooterGameScene: SKScene, SKPhysicsContactDelegate {
         weapon.position = player.position
         
         weapon.physicsBody = SKPhysicsBody(rectangleOf: weapon.size)
-        weapon.physicsBody?.categoryBitMask = CollisionType.playerWeapon.rawValue
-        weapon.physicsBody?.collisionBitMask = CollisionType.enemy.rawValue | CollisionType.enemyWeapon.rawValue
-        weapon.physicsBody?.contactTestBitMask = CollisionType.enemy.rawValue | CollisionType.enemyWeapon.rawValue
+        weapon.physicsBody?.categoryBitMask = spaceCollisionType.playerWeapon.rawValue
+        weapon.physicsBody?.collisionBitMask = spaceCollisionType.enemy.rawValue | spaceCollisionType.enemyWeapon.rawValue
+        weapon.physicsBody?.contactTestBitMask = spaceCollisionType.enemy.rawValue | spaceCollisionType.enemyWeapon.rawValue
         weapon.physicsBody?.mass = 0.001
         
         addChild(weapon)

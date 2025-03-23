@@ -19,9 +19,9 @@ class EnemyNode: SKSpriteNode {
         super.init(texture: texture, color: .white, size: texture.size())
         
         physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
-        physicsBody?.categoryBitMask = CollisionType.enemy.rawValue
-        physicsBody?.collisionBitMask = CollisionType.player.rawValue | CollisionType.playerWeapon.rawValue
-        physicsBody?.contactTestBitMask = CollisionType.player.rawValue | CollisionType.playerWeapon.rawValue
+        physicsBody?.categoryBitMask = spaceCollisionType.enemy.rawValue
+        physicsBody?.collisionBitMask = spaceCollisionType.player.rawValue | spaceCollisionType.playerWeapon.rawValue
+        physicsBody?.contactTestBitMask = spaceCollisionType.player.rawValue | spaceCollisionType.playerWeapon.rawValue
         
         name = "enemy"
         position = CGPoint(x: startPosition.x + xOffset, y: startPosition.y)
@@ -59,9 +59,9 @@ class EnemyNode: SKSpriteNode {
         parent?.addChild(weapon)
         
         weapon.physicsBody = SKPhysicsBody(rectangleOf: weapon.size)
-        weapon.physicsBody?.categoryBitMask = CollisionType.enemyWeapon.rawValue
-        weapon.physicsBody?.collisionBitMask = CollisionType.player.rawValue
-        weapon.physicsBody?.contactTestBitMask = CollisionType.player.rawValue
+        weapon.physicsBody?.categoryBitMask = spaceCollisionType.enemyWeapon.rawValue
+        weapon.physicsBody?.collisionBitMask = spaceCollisionType.player.rawValue
+        weapon.physicsBody?.contactTestBitMask = spaceCollisionType.player.rawValue
         weapon.physicsBody?.mass = 0.001
         
         let speed: CGFloat = 1
