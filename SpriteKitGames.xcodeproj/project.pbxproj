@@ -10,9 +10,22 @@
 		813C45632D86545200664C17 /* SpriteKitGames.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpriteKitGames.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		81EDF2332D90507800572B08 /* Exceptions for "SpriteKitGames" folder in "SpriteKitGames" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				ExplodingMonkeys/README.md,
+			);
+			target = 813C45622D86545200664C17 /* SpriteKitGames */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		813C45652D86545200664C17 /* SpriteKitGames */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				81EDF2332D90507800572B08 /* Exceptions for "SpriteKitGames" folder in "SpriteKitGames" target */,
+			);
 			path = SpriteKitGames;
 			sourceTree = "<group>";
 		};

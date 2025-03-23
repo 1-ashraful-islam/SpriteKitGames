@@ -32,6 +32,17 @@ class ExplodingMonkeyGameScene: SKScene {
         physicsWorld.contactDelegate = self
     }
     
+    override func update(_ currentTime: TimeInterval) {
+        guard banana != nil else { return }
+        
+        if abs(banana.position.y) > 1000 {
+            banana.removeFromParent()
+            banana = nil
+            changePlayer()
+        }
+
+    }
+    
     func createBuildings() {
         var currentX: CGFloat = -15
         
@@ -122,11 +133,6 @@ class ExplodingMonkeyGameScene: SKScene {
         let pause = SKAction.wait(forDuration: 0.15)
         let sequence = SKAction.sequence([raiseArm, pause, lowerArm])
         monkey?.run(sequence)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-            self.isPlayerDisabled?.wrappedValue = false
-            self.activePlayer?.wrappedValue = self.activePlayer?.wrappedValue == .player1 ? .player2 : .player1
-        }
     }
     
     
@@ -172,7 +178,7 @@ extension ExplodingMonkeyGameScene: SKPhysicsContactDelegate {
         
         player.removeFromParent()
         banana.removeFromParent()
-        
+        changePlayer()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
           self.onRequestSceneReset?()
         }
@@ -181,12 +187,19 @@ extension ExplodingMonkeyGameScene: SKPhysicsContactDelegate {
     func bananaHit(building: SKNode, atPoint contactPoint: CGPoint) {
         guard let building = building as? BuildingNode else { return }
         
+        let buildingLocation = convert(contactPoint, to: building)
+        building.hit(at: buildingLocation)
+        
         if let explosion = SKEmitterNode(fileNamed: "Explosion") {
             explosion.position = contactPoint
             addChild(explosion)
             explosion.run(.sequence([.wait(forDuration: 3), .removeFromParent()]))
         }
-
+        
+        banana.name = "" // this will prevent the banana from causing further collisions
+        banana.removeFromParent()
+        banana = nil
+        changePlayer()
     }
     
     func changePlayer() {

@@ -45,7 +45,7 @@ struct ExplodingMonkeyView: View {
                         newScene.activePlayer = $activePlayer
                         newScene.onRequestSceneReset = scene.onRequestSceneReset
 
-                            // Use the current scene's view to present the new scene
+                        // Use the current scene's view to present the new scene
                         scene.view?.presentScene(newScene, transition: .doorway(withDuration: 1.5))
                         scene = newScene
                     }
