@@ -18,6 +18,7 @@ class ExplodingMonkeyGameScene: SKScene {
     var buildings = [BuildingNode]()
     var isPlayerDisabled: Binding<Bool>?
     var activePlayer: Binding<monkeyPlayer>?
+    var onRequestSceneReset: (() -> Void)?
     
     var player1: SKSpriteNode!
     var player2: SKSpriteNode!
@@ -27,6 +28,8 @@ class ExplodingMonkeyGameScene: SKScene {
         backgroundColor = UIColor(hue: 0.669, saturation: 0.99, brightness: 0.67, alpha: 1)
         createBuildings()
         createPlayers()
+        
+        physicsWorld.contactDelegate = self
     }
     
     func createBuildings() {
@@ -128,4 +131,70 @@ class ExplodingMonkeyGameScene: SKScene {
     
     
 
+}
+
+extension ExplodingMonkeyGameScene: SKPhysicsContactDelegate {
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        let firstBody: SKPhysicsBody
+        let secondBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask < contact.bodyB.categoryBitMask {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        guard let firstNode = firstBody.node else { return }
+        guard let secondNode = secondBody.node else { return }
+        
+        if firstNode.name == "banana" && secondNode.name == "building" {
+            bananaHit(building: secondNode, atPoint: contact.contactPoint)
+        }
+        
+        if firstNode.name == "banana" && secondNode.name == "player1" {
+            destroy(player: player1)
+        }
+        
+        if firstNode.name == "banana" && secondNode.name == "player2" {
+            destroy(player: player2)
+        }
+    }
+    
+    func destroy(player: SKSpriteNode) {
+        if let explosion = SKEmitterNode(fileNamed: "Explosion") {
+            explosion.position = player.position
+            addChild(explosion)
+            explosion.run(.sequence([.wait(forDuration: 3), .removeFromParent()]))
+        }
+        
+        player.removeFromParent()
+        banana.removeFromParent()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+          self.onRequestSceneReset?()
+        }
+    }
+    
+    func bananaHit(building: SKNode, atPoint contactPoint: CGPoint) {
+        guard let building = building as? BuildingNode else { return }
+        
+        if let explosion = SKEmitterNode(fileNamed: "Explosion") {
+            explosion.position = contactPoint
+            addChild(explosion)
+            explosion.run(.sequence([.wait(forDuration: 3), .removeFromParent()]))
+        }
+
+    }
+    
+    func changePlayer() {
+        if activePlayer?.wrappedValue == .player1 {
+            activePlayer?.wrappedValue = .player2
+        } else {
+            activePlayer?.wrappedValue = .player1
+        }
+        isPlayerDisabled?.wrappedValue = false
+    }
 }
