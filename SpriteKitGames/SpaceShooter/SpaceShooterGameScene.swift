@@ -51,6 +51,12 @@ class SpaceShooterGameScene: SKScene, SKPhysicsContactDelegate {
         player.physicsBody?.collisionBitMask = spaceCollisionType.enemy.rawValue | spaceCollisionType.enemyWeapon.rawValue
         player.physicsBody?.contactTestBitMask = spaceCollisionType.enemy.rawValue | spaceCollisionType.enemyWeapon.rawValue
         player.physicsBody?.isDynamic = false
+        
+        motionManager.startAccelerometerUpdates()
+    }
+    
+    override func willMove(from view: SKView) {
+        motionManager.stopAccelerometerUpdates()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -61,7 +67,7 @@ class SpaceShooterGameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         
         if let accelerometerData = motionManager.accelerometerData {
-            player.position.y += CGFloat(accelerometerData.acceleration.x * 50)
+            player.position.y += CGFloat(accelerometerData.acceleration.y * 50)
             
             if player.position.y < frame.minY {
                 player.position.y = frame.minY
