@@ -82,6 +82,43 @@ class ExplodingMonkeyGameScene: SKScene {
     
     func launch(angle: Int, velocity: Int) {
         isPlayerDisabled?.wrappedValue = true
+        let speed = Double(velocity) / 10.0
+        let radians = Double(angle) * .pi / 180
+        
+        if banana != nil {
+            banana.removeFromParent()
+            banana = nil
+        }
+        
+        banana = SKSpriteNode(imageNamed: "banana")
+        banana.name = "banana"
+        banana.physicsBody = SKPhysicsBody(circleOfRadius: banana.size.width / 2)
+        banana.physicsBody?.categoryBitMask = eMonkeyCollisionType.banana.rawValue
+        banana.physicsBody?.collisionBitMask = eMonkeyCollisionType.building.rawValue | eMonkeyCollisionType.player.rawValue
+        banana.physicsBody?.contactTestBitMask = eMonkeyCollisionType.building.rawValue | eMonkeyCollisionType.player.rawValue
+        banana.physicsBody?.isDynamic = true
+        banana.physicsBody?.usesPreciseCollisionDetection = true
+        banana.physicsBody?.mass = 0.01
+        
+        addChild(banana)
+        
+        if activePlayer?.wrappedValue == .player1 {
+            banana.position = CGPoint(x: player1.position.x - 30, y: player1.position.y + 40)
+            banana.physicsBody?.angularVelocity = -20
+            banana.physicsBody?.applyImpulse(CGVector(dx: cos(radians) * speed, dy: sin(radians) * speed))
+        } else {
+            banana.position = CGPoint(x: player2.position.x + 30, y: player2.position.y + 40)
+            banana.physicsBody?.angularVelocity = 20
+            banana.physicsBody?.applyImpulse(CGVector(dx: -cos(radians) * speed, dy: sin(radians) * speed))
+        }
+        
+        let monkey = activePlayer?.wrappedValue == .player1 ? player1 : player2
+        
+        let raiseArm = SKAction.setTexture(SKTexture(imageNamed: "player\(activePlayer?.wrappedValue.rawValue ?? 0)Throw"))
+        let lowerArm = SKAction.setTexture(SKTexture(imageNamed: "monkeyPlayer"))
+        let pause = SKAction.wait(forDuration: 0.15)
+        let sequence = SKAction.sequence([raiseArm, pause, lowerArm])
+        monkey?.run(sequence)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.isPlayerDisabled?.wrappedValue = false
