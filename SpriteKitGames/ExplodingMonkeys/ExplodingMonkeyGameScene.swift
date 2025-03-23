@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import SwiftUICore
 
 enum eMonkeyCollisionType: UInt32 {
     case banana = 1
@@ -15,11 +16,12 @@ enum eMonkeyCollisionType: UInt32 {
 
 class ExplodingMonkeyGameScene: SKScene {
     var buildings = [BuildingNode]()
+    var isPlayerDisabled: Binding<Bool>?
+    var activePlayer: Binding<monkeyPlayer>?
     
     override func didMove(to view: SKView) {
         backgroundColor = UIColor(hue: 0.669, saturation: 0.99, brightness: 0.67, alpha: 1)
         createBuildings()
-
     }
     
     func createBuildings() {
@@ -40,7 +42,12 @@ class ExplodingMonkeyGameScene: SKScene {
     }
     
     func launch(angle: Int, velocity: Int) {
+        isPlayerDisabled?.wrappedValue = true
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.isPlayerDisabled?.wrappedValue = false
+            self.activePlayer?.wrappedValue = self.activePlayer?.wrappedValue == .player1 ? .player2 : .player1
+        }
     }
 
 }
